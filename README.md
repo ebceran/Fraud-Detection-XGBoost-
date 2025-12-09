@@ -1,93 +1,70 @@
-# Fraud Detection with XGBoost  
-*A Machine Learning model for identifying fraudulent financial transactions using XGBoost and SHAP Explainable AI.*
+# Fraud Detection with XGBoost
 
+In this project, I built a simple and clear fraud detection model using **XGBoost** and **SHAP**.
+The goal is to identify fraudulent financial transactions using realistic, simulated banking data.
 
-## Project Overview
-
-Financial fraud is a major challenge for banks and fintech companies.  
-Fraudulent transactions are **rare**, **costly**, and **hard to catch** without advanced analytics.
-
-In this project, I built a **Fraud Detection Machine Learning model** using:
-
-- **Simulated real-world banking transaction data**
-- **XGBoost** (industry standard for tabular ML)
-- **Explainable AI (SHAP)** to interpret model decisions
-- **Class imbalance handling** for realistic fraud scenarios
-
-This project demonstrates a full end-to-end workflow that would be used inside a financial institution such as Lloyds, Barclays, or Capital One.
+I created the dataset myself based on typical fraud behaviours seen in real banks and fintech companies.
 
 
 
 
-## Objectives
+## Project Goals
 
-- Generate a realistic synthetic fraud dataset  
-- Preprocess and encode features  
-- Train an XGBoost model tailored for imbalanced data  
-- Evaluate performance using ROC-AUC, precision, recall, confusion matrix  
-- Explain individual predictions using SHAP values  
-- Build a transparent and interpretable model suitable for regulated industries  
-
-
-
-
-## Project Structure
-
-fraud-detection-xgboost/
-
-│
-
-├── fraud_detection_xgboost.ipynb     # Main notebook
-
-├── fraud.csv                          # Dataset (generated in notebook)
-
-└── README.md                          # Documentation (this file)
+* Create a realistic synthetic fraud dataset
+* Preprocess the data and encode categorical features
+* Train an XGBoost model on imbalanced data
+* Evaluate the model (precision, recall, confusion matrix, ROC-AUC)
+* Explain the model using SHAP values
+* Build a transparent and understandable fraud model
 
 
 
 
-## Dataset Description
+## Dataset Overview
 
-The dataset simulates realistic banking transactions.
+The dataset includes typical transaction features:
 
-| Feature | Description |
-|--------|-------------|
-| `amount` | Transaction amount |
-| `oldbalanceOrg` | Sender's balance before transaction |
-| `newbalanceOrig` | Sender's balance after transaction |
-| `oldbalanceDest` | Receiver's balance before transaction |
-| `newbalanceDest` | Receiver's balance after transaction |
-| `transaction_type` | TRANSFER or CASH_OUT |
-| `isFraud` | Target variable (0 = legitimate, 1 = fraud) |
-
-Fraud patterns were applied based on real financial behaviour:
-- High transaction amounts  
-- TRANSFER type more likely fraud  
-- Sender balance significantly lower than transaction amount  
-- Destination balances unusually high  
-
-Fraud ratio ≈ **20%** for easier model training.
+| Feature          | Description                             |
+| ---------------- | --------------------------------------- |
+| amount           | Transaction amount                      |
+| oldbalanceOrg    | Sender’s balance before transaction     |
+| newbalanceOrig   | Sender’s balance after transaction      |
+| oldbalanceDest   | Receiver’s balance before transaction   |
+| newbalanceDest   | Receiver’s balance after transaction    |
+| transaction_type | TRANSFER or CASH_OUT                    |
+| isFraud          | Target variable (0 = normal, 1 = fraud) |
 
 
-## Preprocessing Steps
+### Fraud patterns I included:
 
-- One-hot encoding for categorical transaction type  
-- Feature/target separation  
-- Train-test split with stratification  
-- Handling class imbalance with **scale_pos_weight**  
-- Normalization not required due to tree-based algorithm  
+* Very high transaction amounts
+* TRANSFER transactions more likely to be fraud
+* Sender balance often too low for the transaction
+* Receiver balance jumps unusually high
+* Fraud ratio around **20%** to make modeling easier
 
 
-## Model: XGBoost Classifier
 
-XGBoost was chosen because:
 
-- Performs exceptionally well on tabular financial datasets  
-- Handles class imbalance efficiently  
-- Robust against overfitting  
-- Works seamlessly with SHAP explainability  
+## Preprocessing
 
-Key parameters used:
+* One-hot encoding for transaction_type
+* Train-test split using stratification
+* Handling class imbalance with **scale_pos_weight**
+* No scaling needed (tree-based model)
+
+
+
+## Model: XGBoost
+
+I chose XGBoost because:
+
+* It performs extremely well on tabular financial data
+* It handles imbalanced datasets
+* It is more stable than single decision trees
+* It works perfectly with SHAP for explainability
+
+### Main parameters used:
 
 ```python
 model = xgb.XGBClassifier(
@@ -100,66 +77,84 @@ model = xgb.XGBClassifier(
     eval_metric="logloss",
     random_state=42
 )
-````
+```
+
 
 
 ## Model Evaluation
 
-Metrics calculated:
+I evaluated the model using:
 
-* **Classification report** (Precision, Recall, F1-score)
-* **Confusion matrix**
-* **ROC-AUC Score**
-* **Probability predictions** for threshold analysis
+* Precision
+* Recall
+* F1-score
+* Confusion matrix
+* ROC-AUC
 
-Particularly important:
+### Why recall is important:
 
-* **Recall for fraud (Class 1)** → measures how many frauds the model catches
-* **False negatives** must stay low for banking use cases
-
-
-## Explainable AI (SHAP)
-
-To make the model transparent and regulator-friendly:
-
-* Global interpretation: `shap.summary_plot()`
-* Local interpretation: `shap.force_plot()`
-
-SHAP identifies features that increased or decreased the fraud probability for both the entire dataset and each individual transaction.
-
-Example insights:
-
-* Higher transaction amounts increased fraud probability
-* TRANSFER-type transactions carried higher risk
-* Extremely high destination balances were suspicious
-* Normal sender balances reduced likelihood of fraud
+In fraud detection, missing a fraud (false negative) is very costly for banks.
+So recall for the fraud class (1) matters the most.
 
 
-## Key Insights
 
-* XGBoost provides strong predictive performance for fraud scenarios
-* Handling class imbalance is critical
-* Explainability is **mandatory** for risk and compliance teams
-* SHAP allows model decisions to be audited and trusted
-* This workflow mirrors real-world fraud detection systems
+
+## Explainability (SHAP)
+
+I used SHAP to understand **why** the model predicts a transaction as fraud or normal.
+
+SHAP provides:
+
+### Global explanation
+
+Which features are most important overall.
+
+### Local explanation
+
+Why one single transaction was flagged as fraud.
+
+### Insights I found:
+
+* Higher transaction amounts (↑ fraud probability)
+* TRANSFER transactions more risky
+* Receiver balances jumping very high look suspicious
+* Stable sender balances usually indicate normal behaviour
+
+
+
+
+## Key Learnings
+
+* XGBoost works very well on fraud data
+* Handling class imbalance is essential
+* SHAP makes the model explainable and regulator-friendly
+* Fraud patterns based on real behaviour improve model accuracy
+* This workflow is similar to what many banks use
+
+
 
 
 ## Future Improvements
 
-* Add SMOTE or ADASYN oversampling
+* SMOTE / ADASYN oversampling
 * Hyperparameter tuning with Optuna
-* Model comparison: LightGBM, CatBoost
-* Deploy model as an API using FastAPI or Flask
-* Build a dashboard with Streamlit
+* Model comparison (LightGBM, CatBoost)
+* API deployment with FastAPI
+* Streamlit dashboard for transaction monitoring
+
 
 
 ## Author
 
 Emine Ceran
+
 Financial Data Science Journey
 
-GitHub: [https://github.com/ebceran](https://github.com/ebceran)]
 
-LinkedIn: (https://www.linkedin.com/in/emine-ceran-03b26159/ )
+GitHub: [https://github.com/ebceran](https://github.com/ebceran)
+
+LinkedIn: [https://www.linkedin.com/in/emine-ceran-03b26159/](https://www.linkedin.com/in/emine-ceran-03b26159/)
+
+
 
 
