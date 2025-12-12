@@ -16,7 +16,7 @@ The aim of this project was to explore how data and machine learning can **suppo
 
 False Alarms, Trust, and Human Cost
 
-Fraud detection is not only a technical problem — it is also a human one.
+Fraud detection is not only a technical problem, it is also a human one.
 
 Excessive false alarms can erode trust. When a system repeatedly flags innocent behaviour as suspicious, even legitimate customers may begin to question themselves.
 
@@ -32,10 +32,10 @@ In real banking systems, this means carefully managing thresholds, error trade-o
 Fraud modelling is fundamentally about trade-offs:
 
 
--False positives create customer friction and long-term trust loss
+* False positives create customer friction and long-term trust loss
 
 
--False negatives create direct financial loss and regulatory exposure
+* False negatives create direct financial loss and regulatory exposure
 
 
 There is no universally “correct” threshold.
