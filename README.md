@@ -1,9 +1,12 @@
 # Fraud Detection with XGBoost
 
+This project focuses on supporting transaction-level fraud decisions under uncertainty, balancing risk, trust, and explainability.
 In this project, I built a simple and clear fraud detection model using **XGBoost** and **SHAP**.
 The goal is to identify fraudulent financial transactions using realistic, simulated banking data.
 
 I created the dataset myself based on typical fraud behaviours seen in real banks and fintech companies.
+
+
 
 
 
@@ -83,6 +86,8 @@ model = xgb.XGBClassifier(
 
 ## Model Evaluation
 
+Rather than optimising accuracy alone, the evaluation focuses on recall–precision trade-offs relevant to fraud risk.
+
 I evaluated the model using:
 
 * Precision
@@ -102,6 +107,7 @@ So recall for the fraud class (1) matters the most.
 ## Explainability (SHAP)
 
 I used SHAP to understand **why** the model predicts a transaction as fraud or normal.
+SHAP explanations make model decisions auditable and regulator-friendly.
 
 SHAP provides:
 
