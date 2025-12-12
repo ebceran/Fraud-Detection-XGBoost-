@@ -13,15 +13,35 @@ The aim of this project was to explore how data and machine learning can **suppo
 
 ## 2. How I Think About Fraud
 
-Fraud modelling is fundamentally about **trade-offs**:
 
-- False positives create customer friction and long-term trust loss
-- False negatives create direct financial loss and regulatory exposure
+False Alarms, Trust, and Human Cost
+
+Fraud detection is not only a technical problem — it is also a human one.
+
+Excessive false alarms can erode trust. When a system repeatedly flags innocent behaviour as suspicious, even legitimate customers may begin to question themselves.
+
+This is similar to accusing someone loudly and repeatedly: after a while, even an honest person starts wondering, “Did I do something wrong?”
+
+From a decision intelligence perspective, excessive signalling creates noise rather than clarity.
+
+The goal is not to flag everything that might be risky, but to balance detection with fairness, trust, and proportional response.
+
+In real banking systems, this means carefully managing thresholds, error trade-offs, and human review — not blindly acting on every model output.
+
+
+Fraud modelling is fundamentally about trade-offs:
+
+
+-False positives create customer friction and long-term trust loss
+
+
+-False negatives create direct financial loss and regulatory exposure
 
 
 There is no universally “correct” threshold.
-The right balance depends on **context, customer value, and risk appetite**.
-This mindset shaped both my modelling choices and evaluation strategy.
+The right balance depends on context, customer value, and risk appetite.
+
+This mindset shaped both my modelling choices and my evaluation strategy.
 
 
 
