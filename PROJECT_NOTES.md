@@ -1,10 +1,10 @@
-#  Project Notes – Learnings & Reflections
+# Project Notes – Learnings & Reflections  
 
-*(Fraud Detection with XGBoost)*
+## Fraud Detection with XGBoost
 
 ## 1. Why This Project
 
-Fraud detection is not just a classification task—it is a **decision problem under uncertainty**.
+Fraud detection is not just a classification task, it is a **decision problem under uncertainty**.
 In banking, every transaction requires balancing **risk, customer trust, and explainability** under time pressure.
 The aim of this project was to explore how data and machine learning can **support better decisions**, rather than replace human judgment.
 
@@ -15,8 +15,9 @@ The aim of this project was to explore how data and machine learning can **suppo
 
 Fraud modelling is fundamentally about **trade-offs**:
 
-* **False positives** create customer friction and long-term trust loss.
-* **False negatives** create direct financial loss and regulatory exposure.
+- False positives create customer friction and long-term trust loss
+- False negatives create direct financial loss and regulatory exposure
+
 
 There is no universally “correct” threshold.
 The right balance depends on **context, customer value, and risk appetite**.
@@ -48,6 +49,8 @@ Rather than starting with complex architectures, I focused on:
 
 I use SHAP to make model decisions **transparent and auditable**.
 
+This makes SHAP particularly valuable in regulated environments, where decisions must be justified beyond model performance metrics.
+
 A helpful analogy:
 
 > **SHAP is like the bibliography of a book.**
@@ -58,9 +61,9 @@ A helpful analogy:
 
 This allows:
 
+* Decisions that can be **explained, audited, and defended** to regulators and non-technical stakeholders
 * Global understanding of which features matter most
 * Local explanations for individual transactions
-* Decisions that can be **explained to auditors, regulators, and non-technical stakeholders**
 
 
 
@@ -85,7 +88,7 @@ Recognising and correcting these mistakes significantly improved both the model 
 From a real-world banking perspective:
 
 * Fraud is **rare**, but the cost of mistakes is high.
-* Models do not make decisions—**people do**.
+* Models do not make decisions **people do**.
 * Explainability is not optional; it is a **regulatory requirement**.
 * The most valuable models are those that decision-makers **trust and understand**.
 
