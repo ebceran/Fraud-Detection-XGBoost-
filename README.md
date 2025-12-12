@@ -42,11 +42,11 @@ The dataset includes typical transaction features:
 
 ### Fraud patterns I included:
 
-* Very high transaction amounts
-* TRANSFER transactions more likely to be fraud
-* Sender balance often too low for the transaction
-* Receiver balance jumps unusually high
-* Fraud ratio around **20%** to make modeling easier
+- Very high transaction amounts
+- TRANSFER transactions more likely to be fraud
+- Sender balance often too low for the transaction
+- Receiver balance jumps unusually high
+- Fraud ratio around 20% to make modeling easier
 
 
 
