@@ -1,8 +1,10 @@
 # Fraud Detection with XGBoost
 
 This project focuses on supporting transaction-level fraud decisions under uncertainty, balancing risk, trust, and explainability.
-In this project, I built a simple and clear fraud detection model using **XGBoost** and **SHAP**.
-The goal is to identify fraudulent financial transactions using realistic, simulated banking data.
+
+
+I built a simple and clear fraud detection model using XGBoost and SHAP to identify fraudulent financial transactions using realistic, simulated banking data.
+
 
 I created the dataset myself based on typical fraud behaviours seen in real banks and fintech companies.
 
@@ -13,12 +15,12 @@ I created the dataset myself based on typical fraud behaviours seen in real bank
 
 ## Project Goals
 
-* Create a realistic synthetic fraud dataset
-* Preprocess the data and encode categorical features
-* Train an XGBoost model on imbalanced data
-* Evaluate the model (precision, recall, confusion matrix, ROC-AUC)
-* Explain the model using SHAP values
-* Build a transparent and understandable fraud model
+- Create a realistic synthetic fraud dataset
+- Preprocess data and encode categorical features
+- Train an XGBoost model on imbalanced data
+- Evaluate performance (precision, recall, confusion matrix, ROC-AUC)
+- Explain model decisions using SHAP values
+- Build a transparent and regulator-friendly fraud model
 
 
 
@@ -86,7 +88,7 @@ model = xgb.XGBClassifier(
 
 ## Model Evaluation
 
-Rather than optimising accuracy alone, the evaluation focuses on recall–precision trade-offs relevant to fraud risk.
+Rather than optimising accuracy alone, the evaluation focuses on recall–precision trade-offs relevant to real-world fraud risk.
 
 I evaluated the model using:
 
@@ -107,7 +109,8 @@ So recall for the fraud class (1) matters the most.
 ## Explainability (SHAP)
 
 I used SHAP to understand **why** the model predicts a transaction as fraud or normal.
-SHAP explanations make model decisions auditable and regulator-friendly.
+
+SHAP explanations make model decisions auditable, transparent, and regulator-friendly.
 
 SHAP provides:
 
